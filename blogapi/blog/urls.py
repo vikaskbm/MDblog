@@ -3,4 +3,6 @@ from . import views
 
 app_name = 'blog'
 
-urlpatterns = []
+urlpatterns = [
+    path('posts/', views.PostListView.as_view())
+]
