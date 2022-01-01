@@ -1,10 +1,9 @@
 import React from 'react'
-import BlogList from './components/BlogList'
 
 const App = () => {
     return (
         <>
-            <BlogList />
+            <h1>Hello</h1>
         </>
     )
 }
