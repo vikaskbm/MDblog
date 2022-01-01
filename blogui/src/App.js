@@ -1,12 +1,11 @@
 import React from 'react'
+import BlogList from './components/BlogList'
 
 const App = () => {
     return (
-        <div>
-            <h1>
-                Hi
-            </h1>
-        </div>
+        <>
+            <BlogList />
+        </>
     )
 }
 

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
+const BASE_URL = 'http://localhost:8000/'
 const BlogList = () => {
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(null)
