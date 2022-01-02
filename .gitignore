@@ -18,6 +18,9 @@ __pycache__/
 # data
 *.dump
 
+static_root
+media_root
+
 # npm
 node_modules/
 npm-debug.log
