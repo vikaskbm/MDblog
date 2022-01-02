@@ -1,38 +1,22 @@
 import React from 'react'
 import {
   Container,
-  Dropdown,
   Image,
   Menu,
 } from 'semantic-ui-react'
+import { NavLink } from 'react-router-dom'
+import logo from '../assets/logo.png';
 
 const Navbar = () => (
   <div>
     <Menu fixed='top' inverted>
       <Container>
         <Menu.Item as='a' header>
-          <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} />
-          Project Name
+          <Image size='tiny' src={logo} style={{ marginRight: '1.5em' }} />
+          MDblog
         </Menu.Item>
-        <Menu.Item as='a'>Home</Menu.Item>
-
-        <Dropdown item simple text='Dropdown'>
-          <Dropdown.Menu>
-            <Dropdown.Item>List Item</Dropdown.Item>
-            <Dropdown.Item>List Item</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Header>Header Item</Dropdown.Header>
-            <Dropdown.Item>
-              <i className='dropdown icon' />
-              <span className='text'>Submenu</span>
-              <Dropdown.Menu>
-                <Dropdown.Item>List Item</Dropdown.Item>
-                <Dropdown.Item>List Item</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown.Item>
-            <Dropdown.Item>List Item</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <NavLink to='/'><Menu.Item as='li' > Posts </Menu.Item></NavLink>
+        <NavLink to='/create'><Menu.Item as='li' > Create </Menu.Item></NavLink>
       </Container>
     </Menu>
   </div>

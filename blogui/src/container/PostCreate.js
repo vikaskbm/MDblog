@@ -4,7 +4,7 @@ import { Header } from 'semantic-ui-react'
 const PostCreate = () => {
     return (
         <div>
-            <Header>Post Create</Header>
+            <Header>Post create</Header>
         </div>
     )
 }
