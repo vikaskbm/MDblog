@@ -3,6 +3,7 @@ import { Header, Divider, Item } from 'semantic-ui-react'
 import axios from 'axios'
 
 import Loader from '../components/Loader'
+import Message from '../components/Message'
 
 
 const BASE_URL = 'http://localhost:8000'
@@ -13,12 +14,11 @@ const PostList = () => {
     const [loading, setLoading] = useState(null)
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true) 
         async function fetchData() {
             setLoading(true)
             try {
                 const res = await axios.get(`${BASE_URL}/api/posts`)
-                console.log(res.data)
                 setPosts(res.data)
                 setLoading(false)
             } catch(err) {
@@ -33,6 +33,7 @@ const PostList = () => {
         <>  
             <Header>Post List</Header>
             <Divider />
+            {error && <Message negative message={error}/>}
             {loading && <Loader />}
             <Item.Group>
                 {posts?.map(post => {
