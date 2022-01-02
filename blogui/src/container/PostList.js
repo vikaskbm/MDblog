@@ -23,7 +23,7 @@ const PostList = () => {
                 setPosts(res.data)
                 setLoading(false)
             } catch(err) {
-                setError(err)
+                setError(err.message)
                 setLoading(false)
             }
         }
@@ -42,7 +42,7 @@ const PostList = () => {
                         <Item>
                                 <Item.Image size='small' src={post.thumbnail} />
                                 <Item.Content >
-                                    <NavLink to={`/posts/${post.slug}`}>
+                                    <NavLink to={`/post/${post.slug}`}>
                                         <Item.Header as='h3'>{post.title}</Item.Header>
                                     </NavLink>
                                     <Item.Description>{post.content}</Item.Description>
