@@ -2,7 +2,6 @@ import React from 'react'
 import {
   Container,
   Dropdown,
-  Header,
   Image,
   Menu,
 } from 'semantic-ui-react'

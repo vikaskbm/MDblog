@@ -1,9 +1,16 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import { Container } from 'semantic-ui-react'
 
-const Layout = () => {
+
+const Layout = ({children}) => {
     return (
-        <Navbar />
+        <>
+            <Navbar />
+            <Container text style={{ marginTop: '7em' }}>
+                {children}
+            </Container>
+        </>
     )
 }
 
