@@ -1,10 +1,17 @@
 import React from 'react'
+import {Router, Route, Routes } from 'react-router-dom'
+import 'fomantic-ui-css/semantic.css';
+import { createBrowserHistory } from 'history';
+import PostList from './container/PostList'
 
-const App = () => {
+const history = createBrowserHistory()
+const App = () => { 
     return (
-        <>
-            <h1>Hello</h1>
-        </>
+        <Router history={history}>
+            <Routes>
+                <Route path="/"  component={PostList} />
+            </Routes>
+        </Router>
     )
 }
 
