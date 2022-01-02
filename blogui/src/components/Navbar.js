@@ -11,7 +11,7 @@ import {
   Segment,
 } from 'semantic-ui-react'
 
-const FixedMenuLayout = () => (
+const Navbar = () => (
   <div>
     <Menu fixed='top' inverted>
       <Container>
@@ -116,4 +116,4 @@ const FixedMenuLayout = () => (
   </div>
 )
 
-export default FixedMenuLayout
+export default Navbar

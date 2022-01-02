@@ -6,15 +6,19 @@ import {
   } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 import PostList from './container/PostList'
+import Layout from './container/Layout';
+
 
 const history = createBrowserHistory()
 
 const App = () => { 
     return (
         <Router history={history}>
-          <Routes>
-            <Route path="/" element={<PostList />} />
-          </Routes>
+            <Layout>
+                <Routes>
+                    <Route path="/" element={<PostList />} />
+                </Routes>
+            </Layout>
         </Router>
     )
 }
