@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Header, Divider, Image, Item } from 'semantic-ui-react'
+import { Header, Divider, Item } from 'semantic-ui-react'
 import axios from 'axios'
+
+import Loader from '../components/Loader'
+
 
 const BASE_URL = 'http://localhost:8000'
 
@@ -27,9 +30,10 @@ const PostList = () => {
     }, [])
 
     return (
-        <>
+        <>  
             <Header>Post List</Header>
             <Divider />
+            {loading && <Loader />}
             <Item.Group>
                 {posts?.map(post => {
                     return (
