@@ -20,7 +20,7 @@ const PostDetail = () => {
         async function fetchData() {
             setLoading(true)
             try {
-                const res = await axios.get(`${BASE_URL}/api/post/${postSlug}`)
+                const res = await axios.get(`${BASE_URL}/api/posts/${postSlug}`)
                 setPost(res.data)
                 setLoading(false)
             } catch(err) {
