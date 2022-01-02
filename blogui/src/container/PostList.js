@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom' 
 import { Header, Divider, Item } from 'semantic-ui-react'
 import axios from 'axios'
 
@@ -38,13 +39,15 @@ const PostList = () => {
             <Item.Group>
                 {posts?.map(post => {
                     return (
-                    <Item>
-                        <Item.Image size='small' src={post.thumbnail} />
-                        <Item.Content>
-                            <Item.Header as='a'>{post.title}</Item.Header>
-                            <Item.Description>{post.content}</Item.Description>
-                        </Item.Content>
-                    </Item>
+                        <Item>
+                                <Item.Image size='small' src={post.thumbnail} />
+                                <Item.Content >
+                                    <NavLink to={`/posts/${post.slug}`}>
+                                        <Item.Header as='h3'>{post.title}</Item.Header>
+                                    </NavLink>
+                                    <Item.Description>{post.content}</Item.Description>
+                                </Item.Content>
+                            </Item>
                     )
                 })}
             </Item.Group>
