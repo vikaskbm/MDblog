@@ -6,7 +6,6 @@ import {
   } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 import PostList from './container/PostList'
-import 'fomantic-ui-css/semantic.css';
 
 const history = createBrowserHistory()
 
