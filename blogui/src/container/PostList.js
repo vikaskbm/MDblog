@@ -1,33 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom' 
 import { Header, Divider, Item } from 'semantic-ui-react'
-import axios from 'axios'
 
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { api } from '../api'
+import { useFetch } from '../helpers'
 
 
 const PostList = () => {
-    const [posts, setPosts] = useState(null)
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(null)
-
-    useEffect(() => {
-        setLoading(true) 
-        async function fetchData() {
-            setLoading(true)
-            try {
-                const res = await axios.get(api.posts.list)
-                setPosts(res.data)
-                setLoading(false)
-            } catch(err) {
-                setError(err.message)
-                setLoading(false)
-            }
-        }
-        fetchData()
-    }, [])
+    const { data, loading, error } = useFetch(api.posts.list)
 
     return (
         <>  
@@ -36,7 +18,7 @@ const PostList = () => {
             {error && <Message negative message={error}/>}
             {loading && <Loader />}
             <Item.Group>
-                {posts?.map((post, id) => {
+                {data?.map((post, id) => {
                     return (
                         <Item key={id}>
                             <Item.Image size='small' src={post.thumbnail} />

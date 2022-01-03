@@ -5,44 +5,26 @@ import axios from 'axios'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useParams } from 'react-router-dom'
+
 import { api } from '../api'
+import { useFetch } from '../helpers'
 
-
-const BASE_URL = 'http://localhost:8000'
 
 const PostDetail = () => {
-    const [post, setPost] = useState(null)
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(null)
     const {postSlug} = useParams()
-
-    useEffect(() => {
-        setLoading(true) 
-        async function fetchData() {
-            setLoading(true)
-            try {
-                const res = await axios.get(api.posts.retrieve(postSlug))
-                setPost(res.data)
-                setLoading(false)
-            } catch(err) {
-                setError(err.message)
-                setLoading(false)
-            }
-        }
-        fetchData()
-    }, [postSlug])
+    const { data, loading, error } = useFetch(api.posts.retrieve(postSlug))
 
     return (
         <Container>
             {error && <Message negative message={error}/>}
             {loading && <Loader />}
-            {post && (
+            {data && (
                 <div>
-                    <Image src={ post.thumbnail }/>
-                    <Header as="h1">{post.title}</Header>
-                    <Header as="h4">Last updated: {`${new Date(post.updated_at).toLocaleDateString()}`}</Header>
+                    <Image src={ data.thumbnail }/>
+                    <Header as="h1">{data.title}</Header>
+                    <Header as="h4">Last updated: {`${new Date(data.updated_at).toLocaleDateString()}`}</Header>
                     <p>
-                        {post.content}
+                        {data.content}
                     </p>
                 </div>
             )}
