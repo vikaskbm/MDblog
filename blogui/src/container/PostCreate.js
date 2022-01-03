@@ -12,15 +12,16 @@ import Message from '../components/Message'
 import { api } from '../api'
 
 const PostCreate = () => {
+    const [loading, setLoading] = useState(null)
+    const [error, setError] = useState(null)
+
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const [thumbnail, setThumbnail] = useState('')
-    const [loading, setLoading] = useState(null)
-    const [error, setError] = useState(null)
     
     const mdParser = new MarkdownIt();
     const fileInputRef = useRef()
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -38,7 +39,6 @@ const PostCreate = () => {
                 }
             }).then(res => {
                 setLoading(false)
-                console.log('posts')
                 navigate('/');
             }).catch(err => {
                 setLoading(false)

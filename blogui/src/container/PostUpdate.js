@@ -23,7 +23,7 @@ const PostUpdateForm = ({postSlug, initialTitle, initialThumbnail, initialConten
     const [thumbnail, setThumbnail] = useState(null)
     
     const mdParser = new MarkdownIt();
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const fileInputRef = useRef()
 
     const handleSubmit = (e) => {
