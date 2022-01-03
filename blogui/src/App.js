@@ -4,7 +4,6 @@ import {
     Routes,
     Route
   } from "react-router-dom";
-import { createBrowserHistory } from 'history';
 
 import Layout from './container/Layout';
 
@@ -14,8 +13,7 @@ import PostDetail from './container/PostDetail'
 import PostUpdate from './container/PostUpdate'
 import PostDelete from './container/PostDelete'
 
-
-const history = createBrowserHistory()
+import { history } from './helpers';
 
 const App = () => { 
     return (

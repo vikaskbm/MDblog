@@ -4,8 +4,8 @@ import { Header } from 'semantic-ui-react'
 import axios from 'axios'
 
 import Message from '../components/Message'
-import Loader from '../components/Loader'
 
+import { history } from '../helpers';
 
 const PostCreate = () => {
     const [title, setTitle] = useState('')
@@ -34,6 +34,7 @@ const PostCreate = () => {
             }).then(res => {
                 console.log(res)
                 setLoading(false)
+                history.push('/posts')
 
             }).catch(err => {
                 setLoading(false)
@@ -44,7 +45,6 @@ const PostCreate = () => {
     return (
         <div>
             <Header>Create a post</Header>
-            {loading && <Loader />}
             {error && <Message negative message={error}/>}
             {thumbnail && <Message info message={`Selected Image: ${thumbnail.name}`}/>}
             <Form onSubmit={handleSubmit}>
@@ -80,7 +80,7 @@ const PostCreate = () => {
                     />
                 </Form.Field>
 
-                <Button primary fluid type='submit'>Submit</Button>
+                <Button primary fluid type='submit' loading={loading} disabled={loading}>Submit</Button>
             </Form>
         </div>
     )
