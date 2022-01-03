@@ -20,6 +20,7 @@ const PostCreate = () => {
     const [error, setError] = useState(null)
     
     const mdParser = new MarkdownIt();
+    const fileInputRef = useRef()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -45,7 +46,6 @@ const PostCreate = () => {
                 setError(err.message)
             })
     }
-    const fileInputRef = useRef()
     return (
         <div>
             <Header>Create a post</Header>
