@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Header, Image, Divider, Button, Modal } from 'semantic-ui-react'
+import ReactMarkdown from 'react-markdown'
 
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -24,9 +25,9 @@ const PostDetail = () => {
                     <Image src={ data.thumbnail }/>
                     <Header as="h1">{data.title}</Header>
                     <Header as="h4">Last updated: {`${new Date(data.updated_at).toLocaleDateString()}`}</Header>
-                    <p>
+                    <ReactMarkdown>
                         {data.content}
-                    </p>
+                    </ReactMarkdown>
                     <Divider />
                     <PostDeleteModal title={ data.title } postSlug={ postSlug } thumbnail={ data.thumbnail } />
                 </div>
