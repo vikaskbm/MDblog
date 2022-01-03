@@ -1,8 +1,8 @@
 import React from 'react'
 import { Message } from 'semantic-ui-react'
 
-export default ({message, info, positive, negative, warning}) => (
-  <Message info positive negative warning>
+export default ({message, danger, info, positive, negative, warning}) => (
+  <Message info positive danger negative warning>
       {message}
   </Message>
 )

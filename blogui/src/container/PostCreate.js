@@ -45,7 +45,7 @@ const PostCreate = () => {
     return (
         <div>
             <Header>Create a post</Header>
-            {error && <Message negative message={error}/>}
+            {error && <Message danger message={error}/>}
             {thumbnail && <Message info message={`Selected Image: ${thumbnail.name}`}/>}
             <Form onSubmit={handleSubmit}>
                 <Form.Field>
