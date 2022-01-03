@@ -17,3 +17,16 @@ class PostCreateSerializer(serializers.ModelSerializer):
             "content",
             "thumbnail"
         )
+
+class PostUpdateSerializer(serializers.ModelSerializer):
+    title = serializers.CharField(required=False)
+    content = serializers.CharField(required=False)
+    thumbnail = serializers.ImageField(required=False)
+
+    class Meta:
+        model = Post
+        fields = (
+            "title",
+            "content",
+            "thumbnail"
+        )

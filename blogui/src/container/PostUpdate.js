@@ -35,7 +35,10 @@ const PostUpdateForm = ({postSlug, initialTitle, initialThumbnail, initialConten
         const formData = new FormData()
         formData.append("title", title)
         formData.append("content", content)
-        formData.append("thumbnail", thumbnail)
+        if(thumbnail) {
+            formData.append("thumbnail", thumbnail)
+        }
+        console.log(postSlug)
         axios
             .put(api.posts.update(postSlug), formData, {
                 headers: {
@@ -106,7 +109,7 @@ const PostUpdate = () => {
             {error && <Message negative message={error}/>}
             {loading && <Loader />}
             {data && <PostUpdateForm 
-                postSlug
+                postSlug={postSlug}
                 initialTitle={data.title} 
                 initialThumbnail={data.thumbnail} 
                 initialContent={data.content}/>
