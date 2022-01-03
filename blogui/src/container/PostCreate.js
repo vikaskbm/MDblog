@@ -4,6 +4,7 @@ import { Header } from 'semantic-ui-react'
 import axios from 'axios'
 
 import Message from '../components/Message'
+import { api } from '../api'
 
 import { history } from '../helpers';
 
@@ -25,7 +26,7 @@ const PostCreate = () => {
         console.log(formData)
         axios
         
-            .post('http://127.0.0.1:8000/api/posts/create/', formData, {
+            .post(api.posts.create, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     "Authorization": "Token "

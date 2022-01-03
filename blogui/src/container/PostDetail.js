@@ -5,6 +5,7 @@ import axios from 'axios'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useParams } from 'react-router-dom'
+import { api } from '../api'
 
 
 const BASE_URL = 'http://localhost:8000'
@@ -20,7 +21,7 @@ const PostDetail = () => {
         async function fetchData() {
             setLoading(true)
             try {
-                const res = await axios.get(`${BASE_URL}/api/posts/${postSlug}`)
+                const res = await axios.get(api.posts.retrieve(postSlug))
                 setPost(res.data)
                 setLoading(false)
             } catch(err) {

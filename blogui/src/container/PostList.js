@@ -5,9 +5,8 @@ import axios from 'axios'
 
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import { api } from '../api'
 
-
-const BASE_URL = 'http://localhost:8000'
 
 const PostList = () => {
     const [posts, setPosts] = useState(null)
@@ -19,7 +18,7 @@ const PostList = () => {
         async function fetchData() {
             setLoading(true)
             try {
-                const res = await axios.get(`${BASE_URL}/api/posts`)
+                const res = await axios.get(api.posts.list)
                 setPosts(res.data)
                 setLoading(false)
             } catch(err) {
@@ -37,17 +36,17 @@ const PostList = () => {
             {error && <Message negative message={error}/>}
             {loading && <Loader />}
             <Item.Group>
-                {posts?.map(post => {
+                {posts?.map((post, id) => {
                     return (
-                        <Item>
-                                <Item.Image size='small' src={post.thumbnail} />
-                                <Item.Content >
-                                    <NavLink to={`/post/${post.slug}`}>
-                                        <Item.Header as='h3'>{post.title}</Item.Header>
-                                    </NavLink>
-                                    <Item.Description>{post.content}</Item.Description>
-                                </Item.Content>
-                            </Item>
+                        <Item key={id}>
+                            <Item.Image size='small' src={post.thumbnail} />
+                            <Item.Content >
+                                <NavLink to={`/post/${post.slug}`}>
+                                    <Item.Header as='h3'>{post.title}</Item.Header>
+                                </NavLink>
+                                <Item.Description>{post.content}</Item.Description>
+                            </Item.Content>
+                        </Item>
                     )
                 })}
             </Item.Group>
