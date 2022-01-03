@@ -3,6 +3,10 @@ import { Button, Form } from 'semantic-ui-react'
 import { Header } from 'semantic-ui-react'
 import axios from 'axios'
 
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+import 'react-markdown-editor-lite/lib/index.css';
+
 import Message from '../components/Message'
 import { api } from '../api'
 
@@ -14,6 +18,8 @@ const PostCreate = () => {
     const [thumbnail, setThumbnail] = useState('')
     const [loading, setLoading] = useState(null)
     const [error, setError] = useState(null)
+    
+    const mdParser = new MarkdownIt();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -25,19 +31,16 @@ const PostCreate = () => {
         formData.append("thumbnail", thumbnail)
         console.log(formData)
         axios
-        
             .post(api.posts.create, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     "Authorization": "Token "
                 }
             }).then(res => {
-                console.log(res)
                 setLoading(false)
                 history.push('/posts')
 
             }).catch(err => {
-                console.log(err)
                 setLoading(false)
                 setError(err.message)
             })
@@ -57,11 +60,10 @@ const PostCreate = () => {
                         onChange={e => setTitle(e.target.value)}/>
                 </Form.Field>
 
-                <Form.TextArea 
-                    label='Markdown Content' 
-                    placeholder='This is your post content...' 
-                    value={content}
-                    onChange={e => setContent(e.target.value) }
+                <MdEditor 
+                    style={{ height: '500px' }} 
+                    renderHTML={text => mdParser.render(text)} 
+                    onChange={({text}) => setContent(text) }
                 />
                 
                 <Form.Field>
