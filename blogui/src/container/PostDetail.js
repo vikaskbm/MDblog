@@ -29,7 +29,7 @@ const PostDetail = () => {
             }
         }
         fetchData()
-    }, [])
+    }, [postSlug])
 
     return (
         <Container>
