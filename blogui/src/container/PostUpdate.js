@@ -4,6 +4,7 @@ import axios from 'axios'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
@@ -11,9 +12,6 @@ import 'react-markdown-editor-lite/lib/index.css';
 
 import { api } from '../api'
 import { useFetch } from '../helpers'
-
-import { history } from '../helpers';
-
 
 const PostUpdateForm = ({postSlug, initialTitle, initialThumbnail, initialContent}) => {
     const [loading, setLoading] = useState(null)
@@ -25,7 +23,7 @@ const PostUpdateForm = ({postSlug, initialTitle, initialThumbnail, initialConten
     const [thumbnail, setThumbnail] = useState(null)
     
     const mdParser = new MarkdownIt();
-    
+    let navigate = useNavigate();
     const fileInputRef = useRef()
 
     const handleSubmit = (e) => {
@@ -38,17 +36,15 @@ const PostUpdateForm = ({postSlug, initialTitle, initialThumbnail, initialConten
         if(thumbnail) {
             formData.append("thumbnail", thumbnail)
         }
-        console.log(postSlug)
         axios
             .put(api.posts.update(postSlug), formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Authorization": "Token "
+                    "Authorization": "Token 4fd7510ac0dfb69e7e501334e8405c88ddf76a8e"
                 }
             }).then(res => {
                 setLoading(false)
-                history.push('/posts')
-
+                navigate('/');
             }).catch(err => {
                 setLoading(false)
                 setError(err.message)

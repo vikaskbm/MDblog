@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import { Header } from 'semantic-ui-react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
@@ -9,8 +10,6 @@ import 'react-markdown-editor-lite/lib/index.css';
 
 import Message from '../components/Message'
 import { api } from '../api'
-
-import { history } from '../helpers';
 
 const PostCreate = () => {
     const [title, setTitle] = useState('')
@@ -21,6 +20,7 @@ const PostCreate = () => {
     
     const mdParser = new MarkdownIt();
     const fileInputRef = useRef()
+    let navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -30,17 +30,16 @@ const PostCreate = () => {
         formData.append("title", title)
         formData.append("content", content)
         formData.append("thumbnail", thumbnail)
-        console.log(formData)
         axios
             .post(api.posts.create, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Authorization": "Token "
+                    "Authorization": "Token 4fd7510ac0dfb69e7e501334e8405c88ddf76a8e"
                 }
             }).then(res => {
                 setLoading(false)
-                history.push('/posts')
-
+                console.log('posts')
+                navigate('/');
             }).catch(err => {
                 setLoading(false)
                 setError(err.message)
