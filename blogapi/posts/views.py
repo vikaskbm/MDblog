@@ -24,3 +24,9 @@ class PostCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         print(self.request.user)
         serializer.save(user=self.request.user)
+
+class PostUpdateView(generics.UpdateAPIView):
+    permission_classes = [permissions.AllowAny,]
+    serializer_class = PostCreateSerializer
+    queryset = Post.objects.all()
+    lookup_field = 'slug'
