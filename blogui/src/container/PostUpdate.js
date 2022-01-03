@@ -15,12 +15,10 @@ import { useFetch } from '../helpers'
 import { history } from '../helpers';
 
 
-const PostUpdateForm = ({initialTitle, initialThumbnail, initialContent}) => {
+const PostUpdateForm = ({postSlug, initialTitle, initialThumbnail, initialContent}) => {
     const [loading, setLoading] = useState(null)
     const [error, setError] = useState(null)
 
-    console.log(initialThumbnail)
-    
     const [title, setTitle] = useState(initialTitle)
     const [content, setContent] = useState(initialContent)
     const [currentThumbnail, setCurrentThumbnail] = useState(initialThumbnail)
@@ -38,9 +36,8 @@ const PostUpdateForm = ({initialTitle, initialThumbnail, initialContent}) => {
         formData.append("title", title)
         formData.append("content", content)
         formData.append("thumbnail", thumbnail)
-        console.log(formData)
         axios
-            .post(api.posts.create, formData, {
+            .put(api.posts.update(postSlug), formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     "Authorization": "Token "
@@ -108,7 +105,12 @@ const PostUpdate = () => {
         <>
             {error && <Message negative message={error}/>}
             {loading && <Loader />}
-            {data && <PostUpdateForm />}
+            {data && <PostUpdateForm 
+                postSlug
+                initialTitle={data.title} 
+                initialThumbnail={data.thumbnail} 
+                initialContent={data.content}/>
+            }
         </>
     )
 
