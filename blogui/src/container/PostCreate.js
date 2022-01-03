@@ -9,7 +9,7 @@ import { history } from '../helpers';
 
 const PostCreate = () => {
     const [title, setTitle] = useState('')
-    const [markdown, setMarkdown] = useState('')
+    const [content, setContent] = useState('')
     const [thumbnail, setThumbnail] = useState('')
     const [loading, setLoading] = useState(null)
     const [error, setError] = useState(null)
@@ -17,19 +17,18 @@ const PostCreate = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
-        console.log(title)
-        console.log(markdown)
-        console.log(thumbnail)
 
         const formData = new FormData()
         formData.append("title", title)
-        formData.append("markdown", markdown)
+        formData.append("content", content)
         formData.append("thumbnail", thumbnail)
         console.log(formData)
         axios
-            .post('http://127.0.0.1/8000/api/posts/create/', formData, {
+        
+            .post('http://127.0.0.1:8000/api/posts/create/', formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data"
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": "Token "
                 }
             }).then(res => {
                 console.log(res)
@@ -37,6 +36,7 @@ const PostCreate = () => {
                 history.push('/posts')
 
             }).catch(err => {
+                console.log(err)
                 setLoading(false)
                 setError(err.message)
             })
@@ -45,7 +45,7 @@ const PostCreate = () => {
     return (
         <div>
             <Header>Create a post</Header>
-            {error && <Message danger message={error}/>}
+            {error && <Message negative message={error}/>}
             {thumbnail && <Message info message={`Selected Image: ${thumbnail.name}`}/>}
             <Form onSubmit={handleSubmit}>
                 <Form.Field>
@@ -59,8 +59,8 @@ const PostCreate = () => {
                 <Form.TextArea 
                     label='Markdown Content' 
                     placeholder='This is your post content...' 
-                    value={markdown}
-                    onChange={e => setMarkdown(e.target.value) }
+                    value={content}
+                    onChange={e => setContent(e.target.value) }
                 />
                 
                 <Form.Field>

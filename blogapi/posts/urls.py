@@ -1,6 +1,4 @@
 from django.urls import path
-
-from blogapi.posts.serializers import PostCreateSerializer
 from . import views
 
 app_name = 'posts'
