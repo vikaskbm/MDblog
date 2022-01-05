@@ -1,18 +1,35 @@
+import axios from 'axios'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Form, Button, Container, Header } from 'semantic-ui-react'
+import { api } from '../api'
 
 import Message from '../components/Message'
 
 const Login = () => {
-    const [userName, setUserName] = useState('')
+    const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
+        axios.post(api.auth.login, {
+            username,
+            email,
+            password
+        }).then(res => {
+            setLoading(false)
+            navigate.push('/')
+        }).catch(err => {
+            setLoading(false)
+            setLoading(error.message || error)
+        })
     }
 
     return (
@@ -27,9 +44,9 @@ const Login = () => {
                     <label>Username</label>
                     <input 
                         placeholder='Username' 
-                        value={userName}
+                        value={username}
                         type='text'
-                        onChange={e => setUserName(e.target.value)}/>
+                        onChange={e => setUsername(e.target.value)}/>
                 </Form.Field>
                 <Form.Field>
                     <label>Email</label>
