@@ -24,11 +24,13 @@ const Login = () => {
             email,
             password
         }).then(res => {
+            console.log(res)
+            localStorage.setItem('token', res.data.key)
             setLoading(false)
             navigate.push('/')
         }).catch(err => {
             setLoading(false)
-            setLoading(error.message || error)
+            setError(err.message || err)
         })
     }
 
