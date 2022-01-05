@@ -8,4 +8,7 @@ authAxios.interceptors.request.use(config => {
     newConfig.headers = {
         "Authorization": `Token ${token}`
     }
+    return newConfig
 })
+
+export default authAxios

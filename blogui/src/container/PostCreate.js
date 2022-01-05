@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import { Header } from 'semantic-ui-react'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 
-import Message from '../components/Message'
 import { api } from '../api'
+import authAxios from '../services/authentication.service';
+import Message from '../components/Message'
 
 const PostCreate = () => {
     const [loading, setLoading] = useState(null)
@@ -31,11 +31,10 @@ const PostCreate = () => {
         formData.append("title", title)
         formData.append("content", content)
         formData.append("thumbnail", thumbnail)
-        axios
+        authAxios
             .post(api.posts.create, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Authorization": "Token 4fd7510ac0dfb69e7e501334e8405c88ddf76a8e"
                 }
             }).then(res => {
                 setLoading(false)
@@ -45,6 +44,7 @@ const PostCreate = () => {
                 setError(err.message)
             })
     }
+
     return (
         <div>
             <Header>Create a post</Header>
