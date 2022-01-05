@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Form, Button, Container, Header } from 'semantic-ui-react'
 
+import Message from '../components/Message'
+
 const Login = () => {
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
@@ -16,6 +18,10 @@ const Login = () => {
     return (
         <Container>
             <Header>Login to your account!</Header>
+            {error && (
+                <Message negative message={error} />
+            )}
+
             <Form onSubmit={handleSubmit}>
                 <Form.Field>
                     <label>Username</label>

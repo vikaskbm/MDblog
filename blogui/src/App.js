@@ -12,7 +12,7 @@ import PostCreate from './container/PostCreate'
 import PostDetail from './container/PostDetail'
 import PostUpdate from './container/PostUpdate'
 
-
+import Login from './container/Login';
 
 const App = () => { 
     return (
@@ -23,6 +23,7 @@ const App = () => {
                     <Route path="/create" element={<PostCreate />} />
                     <Route exact path="/post/:postSlug" element={<PostDetail />} />
                     <Route path="/post/:postSlug/update" element={<PostUpdate />} />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
             </Layout>
         </Router>
