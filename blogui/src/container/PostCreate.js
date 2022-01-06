@@ -8,7 +8,7 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 
 import { api } from '../api'
-import authAxios from '../services/authentication.service';
+import { authAxios } from '../services/authentication.service';
 import Message from '../components/Message'
 
 const PostCreate = () => {

@@ -3,23 +3,46 @@ import {
   Container,
   Image,
   Menu,
+  Dropdown
 } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 import logo from '../assets/logo.png';
+import { authenticationService } from '../services/authentication.service';
 
-const Navbar = () => (
-  <div>
-    <Menu fixed='top' inverted>
-      <Container>
-        <Menu.Item as='a' header>
-          <Image size='tiny' src={logo} style={{ marginRight: '1.5em' }} />
-          MDblog
-        </Menu.Item>
-        <NavLink to='/'><Menu.Item as='li' > Posts </Menu.Item></NavLink>
-        <NavLink to='/create'><Menu.Item as='li' > Create </Menu.Item></NavLink>
-      </Container>
-    </Menu>
-  </div>
-)
+const linkStyle = {  
+  display: 'flex', 
+  justifyContent: 'center', 
+  alignItems: 'center'
+}
+
+const Navbar = () => {
+  return (
+    <div>
+      <Menu fixed='top' inverted>
+        <Container>
+          <Menu.Item as='a' header>
+            <Image size='tiny' src={logo} style={{ marginRight: '1.5em' }} />
+            MDblog
+          </Menu.Item>
+          <NavLink to='/' style={linkStyle}><Menu.Item as='li' > Posts </Menu.Item></NavLink>
+          <NavLink to='/create' style={linkStyle}><Menu.Item as='li' > Create </Menu.Item></NavLink>
+          {authenticationService.isAuthenticated ? (
+            <>
+            <Dropdown text='Profile' pointing className='link item'>
+              <Dropdown.Menu>
+                <Dropdown.Item>Profile</Dropdown.Item>
+                <Dropdown.Item>Logout</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <NavLink to='/logout' style={linkStyle}><Menu.Item as='li' > Logout </Menu.Item></NavLink>
+            </>
+          ) : (
+            <NavLink to='/login' style={linkStyle}><Menu.Item as='li' > Login </Menu.Item></NavLink>
+          )}
+        </Container>
+      </Menu>
+    </div>
+  )
+}
 
 export default Navbar

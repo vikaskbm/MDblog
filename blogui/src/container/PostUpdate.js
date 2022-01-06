@@ -11,7 +11,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 
-import authAxios from '../services/authentication.service';
+import { authAxios } from '../services/authentication.service';
 import { api } from '../api'
 import { useFetch } from '../helpers'
 

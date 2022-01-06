@@ -1,7 +1,9 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from "react-router-dom";
 import { Form, Button, Container, Header } from 'semantic-ui-react'
+
+import { authenticationService } from '../services/authentication.service'
 import { api } from '../api'
 
 import Message from '../components/Message'
@@ -10,12 +12,12 @@ const Login = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-
+    
     const navigate = useNavigate();
-
+    
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
@@ -24,16 +26,18 @@ const Login = () => {
             email,
             password
         }).then(res => {
-            console.log(res)
             localStorage.setItem('token', res.data.key)
             setLoading(false)
-            navigate.push('/')
+            navigate('/')
         }).catch(err => {
             setLoading(false)
             setError(err.message || err)
         })
     }
-
+    
+    if(authenticationService.isAuthenticated) {
+        return <Navigate replace to="/" />
+    }
     return (
         <Container>
             <Header>Login to your account!</Header>
