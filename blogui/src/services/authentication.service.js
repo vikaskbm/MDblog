@@ -11,13 +11,17 @@ authAxios.interceptors.request.use(config => {
     return newConfig
 })
 
+function logout() {
+    localStorage.removeItem("token")
+}
 function isAuthenticated() {
     const token = localStorage.getItem("token")
     return token !== null && token !== undefined
 }
 
 const authenticationService = {
-    isAuthenticated: isAuthenticated()
+    isAuthenticated: isAuthenticated(),
+    logout
 }
 
 export { authAxios, authenticationService }
