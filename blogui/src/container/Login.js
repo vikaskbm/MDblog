@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { Navigate, useNavigate } from "react-router-dom";
 import { Form, Button, Container, Header } from 'semantic-ui-react'
+import axios from 'axios';
 
 import { authenticationService } from '../services/authentication.service'
 
 import Message from '../components/Message'
+
+import { api } from '../api';
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -19,8 +22,10 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
-        authenticationService.login(username, email, password)
-        .then(res => {
+        axios.post(api.auth.login, {
+            username, email, password
+        }).then(res => {
+            localStorage.setItem('token', res.data.key)
             setLoading(false)
             navigate('/')
         }).catch(err => {

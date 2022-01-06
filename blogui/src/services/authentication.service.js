@@ -22,6 +22,7 @@ function login(username, email, password) {
         username, email, password
     }).then(res => {
         localStorage.setItem('token', res.data.key)
+        return res
     })
 }
 

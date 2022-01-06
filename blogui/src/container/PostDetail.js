@@ -1,10 +1,10 @@
 import React from 'react'
-import { Container, Header, Image, Divider } from 'semantic-ui-react'
+import { Container, Header, Image, Divider, Button } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
 
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { useParams } from 'react-router-dom'
+import { useParams, NavLink } from 'react-router-dom'
 
 import PostDeleteModal from './PostDelete'
 
@@ -17,7 +17,7 @@ const PostDetail = () => {
     const { data, loading, error } = useFetch(api.posts.retrieve(postSlug))
 
     return (
-        <Container>
+        <Container style={{ paddingTop: 10, paddingBottom: 10}}>
             {error && <Message negative message={error}/>}
             {loading && <Loader />}
             {data && (
@@ -29,6 +29,11 @@ const PostDetail = () => {
                         {data.content}
                     </ReactMarkdown>
                     <Divider />
+                    <NavLink to={`/post/${postSlug}/update`}>
+                        <Button color='yellow'>
+                            Update
+                        </Button>
+                    </NavLink>
                     <PostDeleteModal title={ data.title } postSlug={ postSlug } thumbnail={ data.thumbnail } />
                 </div>
             )}
