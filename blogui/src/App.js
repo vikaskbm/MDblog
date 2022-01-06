@@ -13,6 +13,7 @@ import PostDetail from './container/PostDetail'
 import PostUpdate from './container/PostUpdate'
 
 import Login from './container/Login';
+import Signup from './container/Signup';
 
 const App = () => { 
     return (
@@ -24,6 +25,7 @@ const App = () => {
                     <Route exact path="/post/:postSlug" element={<PostDetail />} />
                     <Route path="/post/:postSlug/update" element={<PostUpdate />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
                 </Routes>
             </Layout>
         </Router>

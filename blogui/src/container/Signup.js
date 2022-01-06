@@ -6,11 +6,14 @@ import { authenticationService } from '../services/authentication.service'
 
 import Message from '../components/Message'
 
+import { api } from '../api';
+import axios from 'axios';
+
 const Login = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
+    const [password1, setPassword1] = useState('')
+    const [password2, setPassword2] = useState('')
     
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -20,8 +23,10 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
-        authenticationService.login(username, email, password)
-        .then(res => {
+        axios.post(api.auth.signup, {
+            username, email, password1, password2
+        }).then(res => {
+            console.log("", res)
             setLoading(false)
             navigate('/')
         }).catch(err => {
@@ -36,7 +41,7 @@ const Login = () => {
 
     return (
         <Container>
-            <Header>Login to your account!</Header>
+            <Header>Create a new account!</Header>
             {error && (
                 <Message negative message={error} />
             )}
@@ -62,19 +67,19 @@ const Login = () => {
                     <label>Password</label>
                     <input 
                         placeholder='********' 
-                        value={password}
+                        value={password1}
                         type='password'
-                        onChange={e => setPassword(e.target.value)}/>
+                        onChange={e => setPassword1(e.target.value)}/>
                 </Form.Field>
                 <Form.Field>
                     <label>Confirm Password</label>
                     <input 
                         placeholder='********' 
-                        value={confirmPassword}
+                        value={password2}
                         type='password'
-                        onChange={e => setConfirmPassword(e.target.value)}/>
+                        onChange={e => setPassword2(e.target.value)}/>
                 </Form.Field>
-                <Button primary fluid type='submit' loading={loading} disabled={loading}>Submit</Button>
+                <Button primary fluid type='submit' loading={loading} disabled={password1!==password2}>Submit</Button>
             </Form>
         </Container>
     )

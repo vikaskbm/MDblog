@@ -30,11 +30,17 @@ function logout() {
 }
 
 function signup(username, email, password1, password2) {
+    let err = null;
+
     axios.post(api.auth.signup, {
         username, email, password1, password2
     }).then(res => {
         localStorage.setItem('token', res.data.key)
+    }).catch(err => {
+        err = err.message || err
     })
+
+    return [false, err]
 }
 
 
