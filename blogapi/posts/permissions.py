@@ -3,5 +3,4 @@ from rest_framework.exceptions import PermissionDenied
 
 class IsAuthor(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        print(obj)
-        return True
+        return request.user == obj.user
