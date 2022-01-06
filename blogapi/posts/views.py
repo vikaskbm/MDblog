@@ -1,3 +1,4 @@
+from django import conf
 from rest_framework import generics
 from rest_framework import permissions
 from .models import Post
@@ -10,11 +11,20 @@ class PostListView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     
+
 class PostDetailView(generics.RetrieveAPIView):
     permission_classes = [permissions.AllowAny,]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     lookup_field = 'slug'
+
+    def get_serializer_context(self):
+        context = super(PostDetailView, self).get_serializer_context()
+        context.update({
+            "request": self.request
+        })
+        return context
+
 
 class PostCreateView(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated,]
@@ -24,11 +34,13 @@ class PostCreateView(generics.CreateAPIView):
         print(self.request.user)
         serializer.save(user=self.request.user)
 
+
 class PostUpdateView(generics.UpdateAPIView):
     permission_classes = [permissions.IsAuthenticated, IsAuthor]
     serializer_class = PostUpdateSerializer
     queryset = Post.objects.all()
     lookup_field = 'slug'
+
 
 class PostDeleteView(generics.DestroyAPIView):
     permission_classes = [permissions.IsAuthenticated, IsAuthor]
