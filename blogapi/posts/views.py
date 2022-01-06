@@ -2,6 +2,7 @@ from rest_framework import generics
 from rest_framework import permissions
 from .models import Post
 from .serializers import PostSerializer, PostCreateSerializer, PostUpdateSerializer
+from .permissions import IsAuthor
 
 
 class PostListView(generics.ListAPIView):
@@ -16,7 +17,7 @@ class PostDetailView(generics.RetrieveAPIView):
     lookup_field = 'slug'
 
 class PostCreateView(generics.CreateAPIView):
-    permission_classes = [permissions.AllowAny,]
+    permission_classes = [permissions.IsAuthenticated,]
     serializer_class = PostCreateSerializer
 
     def perform_create(self, serializer):
@@ -24,12 +25,12 @@ class PostCreateView(generics.CreateAPIView):
         serializer.save(user=self.request.user)
 
 class PostUpdateView(generics.UpdateAPIView):
-    permission_classes = [permissions.AllowAny,]
+    permission_classes = [permissions.IsAuthenticated, IsAuthor]
     serializer_class = PostUpdateSerializer
     queryset = Post.objects.all()
     lookup_field = 'slug'
 
 class PostDeleteView(generics.DestroyAPIView):
-    permission_classes = [permissions.AllowAny,]
+    permission_classes = [permissions.IsAuthenticated, IsAuthor]
     queryset = Post.objects.all()
     lookup_field = 'slug'
