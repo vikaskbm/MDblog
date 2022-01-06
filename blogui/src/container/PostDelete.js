@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { authAxios } from '../services/authentication.service'
 import { Modal, Button, Image, Header } from 'semantic-ui-react'
 
 import Message from '../components/Message'
@@ -20,14 +20,12 @@ const PostDeleteModal = ({title, postSlug, thumbnail}) => {
         console.log(api.posts.delete(postSlug));
         setLoading(true);
         
-        axios.delete(api.posts.delete(postSlug), {
-            headers: {
-                "Authorization": "Token 4fd7510ac0dfb69e7e501334e8405c88ddf76a8e"
-            }
-        }).then(res => {
+        authAxios.delete(api.posts.delete(postSlug))
+        .then(res => {
             setLoading(false)
             navigate('/');
-        }).catch(err => {
+        })
+        .catch(err => {
             setLoading(false)
             setError(err.message || err)
         })
