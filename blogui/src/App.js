@@ -14,6 +14,7 @@ import PostUpdate from './container/PostUpdate'
 
 import Login from './container/Login';
 import Signup from './container/Signup';
+import PrivateRoute from './container/PrivateRoute';
 
 const App = () => { 
     return (
@@ -21,7 +22,14 @@ const App = () => {
             <Layout>
                 <Routes>
                     <Route exact path="/" element={<PostList />} />
-                    <Route path="/create" element={<PostCreate />} />
+                    <Route
+                        path="/create"
+                        element={
+                            <PrivateRoute>
+                                <PostCreate />
+                            </PrivateRoute>
+                        }
+                    />
                     <Route exact path="/post/:postSlug" element={<PostDetail />} />
                     <Route path="/post/:postSlug/update" element={<PostUpdate />} />
                     <Route path="/login" element={<Login />} />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Header, Image, Divider, Button, Modal } from 'semantic-ui-react'
+import { Container, Header, Image, Divider } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
 
 import Message from '../components/Message'
