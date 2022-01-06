@@ -12,8 +12,9 @@ authAxios.interceptors.request.use(config => {
     return newConfig
 })
 
-function logout() {
-    localStorage.removeItem("token")
+function isAuthenticated() {
+    const token = localStorage.getItem("token")
+    return token !== null && token !== undefined
 }
 
 function login(username, email, password) {
@@ -23,10 +24,13 @@ function login(username, email, password) {
         localStorage.setItem('token', res.data.key)
     })
 }
-function isAuthenticated() {
-    const token = localStorage.getItem("token")
-    return token !== null && token !== undefined
+
+function logout() {
+    localStorage.removeItem("token")
 }
+
+
+
 
 const authenticationService = {
     isAuthenticated: isAuthenticated(),

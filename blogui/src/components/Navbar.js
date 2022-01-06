@@ -36,7 +36,10 @@ const Navbar = () => {
                 </Dropdown>
             </>
           ) : (
-            <NavLink to='/login' style={linkStyle}><Menu.Item as='li' > Login </Menu.Item></NavLink>
+            <>
+              <NavLink to='/login' style={linkStyle}><Menu.Item as='li' > Login </Menu.Item></NavLink>
+              <NavLink to='/signup' style={linkStyle}><Menu.Item as='li' > Signup </Menu.Item></NavLink>
+            </>
           )}
         </Container>
       </Menu>
