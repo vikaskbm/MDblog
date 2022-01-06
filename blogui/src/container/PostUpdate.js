@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Button, Form, Header, Image } from 'semantic-ui-react'
 
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 
 import MarkdownIt from 'markdown-it';
@@ -100,7 +100,9 @@ const PostUpdateForm = ({postSlug, initialTitle, initialThumbnail, initialConten
 const PostUpdate = () => {
     const {postSlug} = useParams()
     const { data, loading, error } = useFetch(api.posts.retrieve(postSlug))
-
+    if(data && data.is_author === false) {
+        return <Navigate to='/' />
+    }
     return (
         <>
             {error && <Message negative message={error}/>}
