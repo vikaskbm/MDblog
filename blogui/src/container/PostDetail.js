@@ -29,12 +29,17 @@ const PostDetail = () => {
                         {data.content}
                     </ReactMarkdown>
                     <Divider />
-                    <NavLink to={`/post/${postSlug}/update`}>
-                        <Button color='yellow'>
-                            Update
-                        </Button>
-                    </NavLink>
-                    <PostDeleteModal title={ data.title } postSlug={ postSlug } thumbnail={ data.thumbnail } />
+                    {console.log(data)}
+                    {data.is_author && (
+                        <>
+                        <NavLink to={`/post/${postSlug}/update`}>
+                            <Button color='yellow'>
+                                Update
+                            </Button>
+                        </NavLink>
+                        <PostDeleteModal title={ data.title } postSlug={ postSlug } thumbnail={ data.thumbnail } />
+                        </>
+                    )}
                 </div>
             )}
         </Container>
