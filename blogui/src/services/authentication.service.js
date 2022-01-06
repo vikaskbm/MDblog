@@ -1,4 +1,5 @@
 import axios from "axios";
+import { api } from "../api";
 
 const authAxios = axios.create()
 
@@ -14,6 +15,14 @@ authAxios.interceptors.request.use(config => {
 function logout() {
     localStorage.removeItem("token")
 }
+
+function login(username, email, password) {
+    axios.post(api.auth.login, {
+        username, email, password
+    }).then(res => {
+        localStorage.setItem('token', res.data.key)
+    })
+}
 function isAuthenticated() {
     const token = localStorage.getItem("token")
     return token !== null && token !== undefined
@@ -21,7 +30,8 @@ function isAuthenticated() {
 
 const authenticationService = {
     isAuthenticated: isAuthenticated(),
-    logout
+    logout,
+    login
 }
 
 export { authAxios, authenticationService }

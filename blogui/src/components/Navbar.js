@@ -25,14 +25,16 @@ const Navbar = () => {
             MDblog
           </Menu.Item>
           <NavLink to='/' style={linkStyle}><Menu.Item as='li' > Posts </Menu.Item></NavLink>
-          <NavLink to='/create' style={linkStyle}><Menu.Item as='li' > Create </Menu.Item></NavLink>
           {authenticationService.isAuthenticated ? (
-            <Dropdown text='Profile' pointing className='link item'>
-              <Dropdown.Menu>
-                <Dropdown.Item>Profile</Dropdown.Item>
-                <Dropdown.Item onClick={authenticationService.logout}>Logout</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <>
+                <NavLink to='/create' style={linkStyle}><Menu.Item as='li' > Create </Menu.Item></NavLink>
+                <Dropdown text='Profile' pointing className='link item'>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={authenticationService.logout}>Logout</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+            </>
           ) : (
             <NavLink to='/login' style={linkStyle}><Menu.Item as='li' > Login </Menu.Item></NavLink>
           )}
