@@ -29,10 +29,10 @@ and data is stored in PostgreSQL database.
    ![Sign up Screen](images/1.jpg)
 
 2. Sign in Screen
-   ![Sign in Screen](images/2.jpg)
+   ![Sign in Screen](images/2.png)
 
 3. Create a post Screen
-   ![Create a post Screen](images/3.jpg)
+   ![Create a post Screen](images/3.png)
 
 4. Blog Screen
-   ![Blog Screen](images/4.jpg)
+   ![Blog Screen](images/4.png)
